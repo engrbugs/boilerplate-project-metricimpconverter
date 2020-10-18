@@ -6,12 +6,12 @@
  *
  */
 const units = {
-  gal: ["gallons", "l", 3.78541],
-  l: ["liters", "gal", 0.26417],
-  kg: ["kilograms", "lbs", 2.20462],
-  lbs: ["pounds", "kg", 0.453592],
-  mi: ["miles", "km", 1.60934],
-  km: ["kilometers", "mi", 0.621371],
+  gal: ["gallons", "l"],
+  l: ["liters", "gal"],
+  kg: ["kilograms", "lbs"],
+  lbs: ["pounds", "kg"],
+  mi: ["miles", "km"],
+  km: ["kilometers", "mi"],
 };
 
 function ConvertHandler() {
@@ -36,11 +36,11 @@ function ConvertHandler() {
 
   this.getReturnUnit = function (initUnit) {
     initUnit = initUnit.toLowerCase();
-    return this.units[initUnit][1];
+    return units[initUnit][1];
   };
 
   this.spellOutUnit = function (unit) {
-    return this.units[unit][0];
+    return units[unit][0];
   };
 
   this.convert = function (initNum, initUnit) {
@@ -52,9 +52,33 @@ function ConvertHandler() {
     const kgToLbs = 1 / lbsToKg;
     const kmToMi = 1 / miToKm;
 
-    // initUnit = initUnit.toLowerCase();
-    return initNum + ' ' + initUnit;
-    // return initNum * this.units[initUnit][2];
+    if (initUnit === null) {
+      return null;
+    }
+
+    switch(initUnit) {
+      case 'gal': {
+        return initNum * galToL;
+      };
+      case 'l': {
+        return initNum * LToGal;
+      };
+      case 'lbs': {
+        return initNum * lbsToKg;
+      };
+      case 'kg': {
+        return initNum * kgToLbs;
+      };
+      case 'mi': {
+        return initNum * miToKm;
+      };
+      case 'km': {
+        return initNum * kmToMi;
+      };
+      default: {
+        return null;
+      }
+    }
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
@@ -63,14 +87,14 @@ function ConvertHandler() {
       initUnit,
       returnNum,
       returnUnit,
-      // string:
-      //   initNum +
-      //   " " +
-      //   this.spellOutUnit(initUnit) +
-      //   " converts to " +
-      //   returnNum.toFixed(5) +
-      //   " " +
-      //   this.spellOutUnit(returnUnit),
+      string:
+        initNum +
+        " " +
+        this.spellOutUnit(initUnit) +
+        " converts to " +
+        returnNum.toFixed(5) +
+        " " +
+        this.spellOutUnit(returnUnit),
     };
   };
 }
