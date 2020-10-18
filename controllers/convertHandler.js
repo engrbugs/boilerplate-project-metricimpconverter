@@ -17,7 +17,7 @@ const units = {
 function ConvertHandler() {
   this.divideFraction = function (input) {
     input = input.join("").split("/");
-    return input.length <= 2 ? input.reduce((a, b) => a / b) : null;
+    return input.length <= 2 ? parseFloat((input.reduce((a, b) => a / b)).trim()) : null;
   };
 
   this.getNum = function (input) {
