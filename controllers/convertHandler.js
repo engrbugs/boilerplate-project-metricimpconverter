@@ -58,22 +58,22 @@ function ConvertHandler() {
 
     switch(initUnit) {
       case 'gal': {
-        return initNum * galToL;
+        return parseFloat((initNum * galToL).toFixed(5));
       };
       case 'l': {
-        return initNum * LToGal;
+        return parseFloat((initNum * LToGal).toFixed(5));
       };
       case 'lbs': {
-        return initNum * lbsToKg;
+        return parseFloat((initNum * lbsToKg).toFixed(5));
       };
       case 'kg': {
-        return initNum * kgToLbs;
+        return parseFloat((initNum * kgToLbs).toFixed(5));
       };
       case 'mi': {
-        return initNum * miToKm;
+        return parseFloat((initNum * miToKm).toFixed(5));
       };
       case 'km': {
-        return initNum * kmToMi;
+        return parseFloat((initNum * kmToMi).toFixed(5));
       };
       default: {
         return null;
@@ -92,7 +92,7 @@ function ConvertHandler() {
         " " +
         this.spellOutUnit(initUnit) +
         " converts to " +
-        returnNum.toFixed(5) +
+        returnNum +
         " " +
         this.spellOutUnit(returnUnit),
     };
